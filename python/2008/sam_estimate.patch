@@ -1,0 +1,18 @@
+# Add to the end of history_plot.py to re-instate
+
+### Sam's adjusted estimate post-RNC
+
+# Sept 1, 4, 5, 8, 9, 11
+dates = [245, 248, 249, 252, 253, 255]
+est_ev = [343, 324, 311, 238, 265, 238]
+ci_low = [324, 287, 278, 200, 232, 200]
+ci_high = [362, 353, 342, 270, 296, 270]
+
+plot(dates, est_ev, '-g', linewidth=2)
+plot(dates, ci_low, '--g', linewidth=1)
+plot(dates, ci_high, '--g', linewidth=1)
+### End adjusted estimate
+
+show()
+savefig(open('EV_history-with_adjusted.png', 'w'), dpi=62.5,
+		facecolor='#fcfcf4', edgecolor='#fcfcf4')

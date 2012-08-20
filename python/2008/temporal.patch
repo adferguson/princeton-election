@@ -1,0 +1,37 @@
+38a39
+> temporal_filename = "polls.temporal.txt"
+76a78
+> 	temporal_polls()
+159c161,164
+< 		pfile.write("%s " % sqrt(1.0/polls[0][4]))
+---
+> 		try:
+> 			pfile.write("%s " % sqrt(1.0/polls[0][4]))
+> 		except ZeroDivisionError:
+> 			prfile.write("0 ")
+202a208,232
+> def temporal_polls():
+> 	tfile = open(temporal_filename, "w")
+> 	today = int(datetime.date.today().strftime("%j"))
+> 
+> 	# Make sure the polls are sorted with most recent first
+> 	for state in state_polls.keys():
+> 		polls = state_polls[state]
+> 		polls.sort(key=lambda x: x[2], reverse=True)
+> 
+> 	for state in sorted(state_names, key=lambda x: state_names[x]):
+> 		polls = state_polls[state]
+> 
+> 		latest_poll = [ polls[0] ] 
+> 
+> 		# XXX cleaning:
+> 		#  reject two polls by the same pollster if their
+> 		# [startdate,enddate] intervals overlap (i.e. if older
+> 		# enddate>=newer startdate).
+> 
+> 		write_statistics(tfile, latest_poll)
+> 		tfile.write("%s\n" % today)
+> 
+> 	tfile.close()
+> 
+> 
