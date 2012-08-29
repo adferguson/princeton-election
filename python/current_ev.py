@@ -56,6 +56,8 @@ gives a median EV expectation of
 
 Obama %s, Romney %s.
 
+Obama's meta-margin is: %s%%
+
 This update is effective as of %s.
 
 From
@@ -63,5 +65,5 @@ The Princeton Election Consortium
 """
 
 email = open("email_update.txt", "w")
-email.write(email_update % (dem_ev, gop_ev, time_str))
+email.write(email_update % (dem_ev, gop_ev, metamargin, time_str))
 email.close()
