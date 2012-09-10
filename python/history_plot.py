@@ -20,6 +20,7 @@
 # To seek a commercial-use license, contact sswang@princeton.edu
 #
 # Update History:
+#    Sep  4, 2012 -- Relabel graph; lighten the band
 #    Aug 12, 2012 -- Add support for comments in csv file; CI more translucent
 #    Jul  8, 2012 -- Add year to large chart
 #    Jul  7, 2012 -- Update for 2012
@@ -92,7 +93,7 @@ ylabel("Obama EV", fontsize=25, fontweight='bold')
 plot(dates, medianDem, '-k', linewidth=2)
 
 xs, ys = poly_between(dates, lowDem95, highDem95)
-fill(xs, ys, '#222222', alpha=0.1, edgecolor='none')
+fill(xs, ys, '#222222', alpha=0.05, edgecolor='none')
 
 xlim(campaign_start, 320)
 ylim(157, 383)
@@ -122,7 +123,7 @@ xticks([campaign_start,153,183,214,245,275,306],
 
 grid(color='#aaaaaa')
 
-title("Median EV estimator with 95% confidence interval", fontsize=18,
+title("Median EV estimator", fontsize=18,
 		fontweight='bold')
 ylabel("Obama EV",fontsize=16)
 text(campaign_start+3, 172, time.strftime("%d-%b-%Y %I:%M%p %Z"), fontsize=14)
@@ -131,10 +132,7 @@ text(campaign_start+3, 159, "election.princeton.edu", fontsize=14)
 plot(dates, medianDem, '-k', linewidth=2)
 
 xs, ys = poly_between(dates, lowDem95, highDem95)
-fill(xs, ys, '#222222', alpha=0.1, edgecolor='none')
-
-plot(dates, highDem95, '-g', linewidth=1, alpha=0.25)
-plot(dates, lowDem95, '-g', linewidth=1, alpha=0.25)
+fill(xs, ys, '#222222', alpha=0.05, edgecolor='none')
 
 xlim(campaign_start, 320)
 ylim(157, 383)
