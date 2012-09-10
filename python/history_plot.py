@@ -145,18 +145,21 @@ savefig(open('EV_history-unlabeled.png', 'w'), dpi=62.5, facecolor='#fcfcf4',
 ## Annotations 
 
 # August 11
-annotate("Ryan\nas VP", xy=(224, medianDem[224-campaign_start]), xytext=(224.01,
-	medianDem[224-campaign_start]-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
+day=224
+annotate("Ryan\nas VP", xy=(day, medianDem[day-campaign_start]), xytext=(float(day) + 0.01,
+	medianDem[day-campaign_start]-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
-# August 27
-annotate("RNC", xy=(240, medianDem[240-campaign_start]), xytext=(240.01,
-	medianDem[240-campaign_start]+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
+# August 30
+day=243
+annotate("RNC", xy=(day, medianDem[day-campaign_start]), xytext=(float(day) + 0.01,
+	medianDem[day-campaign_start]+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
-# Sept 3
-annotate("DNC", xy=(247, medianDem[247-campaign_start]), xytext=(247.01,
-	medianDem[247-campaign_start]-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
+# Sept 6
+day=250
+annotate("DNC", xy=(day, medianDem[day-campaign_start]), xytext=(float(day) + 0.01,
+	medianDem[day-campaign_start]-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 
