@@ -94,7 +94,7 @@ ylabel("Obama EV", fontsize=25, fontweight='bold')
 plot(dates, medianDem, '-k', linewidth=2)
 
 xs, ys = poly_between(dates, lowDem95, highDem95)
-fill(xs, ys, '#222222', alpha=0.05, edgecolor='none')
+fill(xs, ys, '#222222', alpha=0.075, edgecolor='none')
 
 xlim(campaign_start, 320)
 ylim(157, 383)
@@ -133,7 +133,7 @@ text(campaign_start+3, 159, "election.princeton.edu", fontsize=14)
 plot(dates, medianDem, '-k', linewidth=2)
 
 xs, ys = poly_between(dates, lowDem95, highDem95)
-fill(xs, ys, '#222222', alpha=0.05, edgecolor='none')
+fill(xs, ys, '#222222', alpha=0.075, edgecolor='none')
 
 xlim(campaign_start, 320)
 ylim(157, 383)
