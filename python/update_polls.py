@@ -93,11 +93,11 @@ def main():
     huffpo_config.close()
 
     # process archive of polls
-    for fname in os.listdir(archive_dir):
-        n = int(fname.split(".")[0])
-        if n > max_filenum:
-            max_filenum = n
-        parse_pollfile(archive_dir + fname)
+#    for fname in os.listdir(archive_dir):
+#        n = int(fname.split(".")[0])
+#        if n > max_filenum:
+#            max_filenum = n
+#        parse_pollfile(archive_dir + fname)
 
     # get the latest polls
     socket.setdefaulttimeout(5)
@@ -285,6 +285,7 @@ def fetch_latest_polls():
 
     while (not stop):
         page_num += 1
+        print "Fetching page: " + str(page_num)
         page = url_fetcher(page_num)
 
         xmldoc = parse_pollfile(page)
@@ -296,10 +297,10 @@ def fetch_latest_polls():
             xmldoc.writexml(f)
             f.close()
 
-        if len(xmldoc.childNodes[0].childNodes) < huffpo_childNodes_per_page:
+        if len(xmldoc.childNodes[0].childNodes) == 0:
             stop = True
         else:
-            time.sleep(2)
+            time.sleep(1)
 
 
 ############################################################################
