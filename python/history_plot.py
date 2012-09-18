@@ -135,6 +135,12 @@ plot(dates, medianDem, '-k', linewidth=2)
 xs, ys = poly_between(dates, lowDem95, highDem95)
 fill(xs, ys, '#222222', alpha=0.075, edgecolor='none')
 
+# hurricane tracker prediction
+xs, ys = poly_between([308, 310], [262, 262], [357, 357])
+fill(xs, ys, 'yellow', edgecolor='none')
+xs, ys = poly_between([308, 310], [287, 287], [337, 337])
+fill(xs, ys, 'red', edgecolor='none')
+
 xlim(campaign_start, 320)
 ylim(157, 383)
 
