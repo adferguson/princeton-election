@@ -146,14 +146,16 @@ savefig(open('EV_history-unlabeled.png', 'w'), dpi=62.5, facecolor='#fcfcf4',
 
 # July 12
 day=194
-annotate("Bain", xy=(day, medianDem[day-campaign_start]-2), xytext=(float(day) + 0.01,
-	medianDem[day-campaign_start]-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
+#annotate("Bain", xy=(day, medianDem[day-campaign_start]-2), xytext=(float(day) + 0.01,
+annotate("Bain", xy=(day, 297), xytext=(float(day) + 0.01,
+	297-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 # August 11
 day=224
-annotate("Ryan\nas VP", xy=(day, medianDem[day-campaign_start]+2), xytext=(float(day) + 0.01,
-	medianDem[day-campaign_start]+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
+#annotate("Ryan\nas VP", xy=(day, medianDem[day-campaign_start]+2), xytext=(float(day) + 0.01,
+annotate("Ryan\nas VP", xy=(day, 333), xytext=(float(day) + 0.01,
+	333+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 # August 30
