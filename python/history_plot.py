@@ -140,6 +140,7 @@ xs, ys = poly_between([308, 310], [262, 262], [357, 357])
 fill(xs, ys, 'yellow', edgecolor='none')
 xs, ys = poly_between([308, 310], [287, 287], [337, 337])
 fill(xs, ys, 'red', edgecolor='none')
+text(312, 327, "Prediction", fontsize=14, rotation='270')
 
 xlim(campaign_start, 320)
 ylim(157, 383)
