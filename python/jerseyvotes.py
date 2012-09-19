@@ -16,6 +16,7 @@
 # To seek a commercial-use license, contact sswang@princeton.edu
 #
 # Update History:
+#    Sep 19, 2012 -- Permit JerseyVotes calculation to be done for all states
 #    Jul  7, 2012 -- Initial port from 2008 version
 #
 ############################################################################
@@ -25,26 +26,45 @@ from decimal import Decimal
 jerseyvotes = {}
 statemargins = {}
 
+def display_state(jvdisplay, state):
+    jvdisplay.write("<tr>\n")
+    jvdisplay.write("\t<td>%s</td>" % state)
+
+    margin = statemargins[state]
+    
+    if margin > 0:
+        jvdisplay.write('<td style="color: blue">Obama +%s%%</td>' % margin)
+    elif margin < 0:
+        jvdisplay.write('<td style="color: red">Romney +%s%%</td>' % -margin)
+    else:
+        jvdisplay.write("<td>Tied</td>")
+    
+    if state != "NJ":
+        jvdisplay.write("<td>%#.1f</td>\n" % jerseyvotes[state])
+    else:
+        jvdisplay.write("<td>%s</td>\n" % jerseyvotes[state]) # NJ power is not rounded
+    jvdisplay.write("</tr>\n")
+
 # The jerseyvotes.csv file has the following format:
 # index, state abbreviation, voter power (most powerful = 100)
 
 jvfile = open("../matlab/jerseyvotes.csv")
 
 for line in jvfile:
-	values = line[:-1].split(",")
-	jerseyvotes[values[1]] = Decimal(values[2])
+    values = line[:-1].split(",")
+    jerseyvotes[values[1]] = Decimal(values[2])
 
 jvfile.close()
 
 # The stateprobs.csv file has the following format:
 # prob. of Dem win, margin, prob. of Dem win with Dem 2% boost, prob. 
-# 		of Dem win with Rep 2% boost, state abbreviation
+#         of Dem win with Rep 2% boost, state abbreviation
 
 spfile = open("../matlab/stateprobs.csv")
 
 for line in spfile:
-	values = line[:-1].split(",")
-	statemargins[values[4]] = Decimal(values[1])
+    values = line[:-1].split(",")
+    statemargins[values[4]] = Decimal(values[1])
 
 spfile.close()
 
@@ -58,25 +78,13 @@ jvdisplay.write("<tr>\n")
 jvdisplay.write("\t<th>State</th><th>Margin</th><th>Power</th>\n")
 jvdisplay.write("</tr>\n")
 
-for state in sorted(jerseyvotes, key=lambda x: jerseyvotes[x], reverse=True):
+top_states = sorted(jerseyvotes, key=lambda x: jerseyvotes[x], reverse=True)[:10]
 
-	jvdisplay.write("<tr>\n")
-	jvdisplay.write("\t<td>%s</td>" % state)
+for state in top_states:
+    display_state(jvdisplay, state)
 
-	margin = statemargins[state]
-	
-	if margin > 0:
-		jvdisplay.write('<td style="color: blue">Obama +%s%%</td>' % margin)
-	elif margin < 0:
-		jvdisplay.write('<td style="color: red">Romney +%s%%</td>' % -margin)
-	else:
-		jvdisplay.write("<td>Tied</td>")
-	
-	if state != "NJ":
-		jvdisplay.write("<td>%#.1f</td>\n" % jerseyvotes[state])
-	else:
-		jvdisplay.write("<td>%s</td>\n" % jerseyvotes[state]) # NJ power is not rounded
-	jvdisplay.write("</tr>\n")
+if "NJ" not in top_states:
+    display_state(jvdisplay, "NJ")
 
 jvdisplay.write("</table>\n")
 jvdisplay.close()
