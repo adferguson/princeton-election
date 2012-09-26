@@ -14,6 +14,7 @@
 # To seek a commercial-use license, contact sswang@princeton.edu
 #
 # Update History:
+#    Aug 19, 2012 -- moved to GitHub; future updates in commit messages
 #    Jul 7, 2012 -- Initial port from 2008 version
 #
 ############################################################################
@@ -33,9 +34,9 @@ metamargin = float(values[12])
 
 evdisplay = open("current_ev.html", "w")
 
-evdisplay.write('\t<li>As of %s:</li>\n' % time_str)
-evdisplay.write('\t<li style="color: blue">Obama: %s</li>\n' % dem_ev)
-evdisplay.write('\t<li style="color: red">Romney: %s</li>\n' % gop_ev)
+evdisplay.write('\t<li><a href="/history-of-electoral-votes-for-obama/">As of %s:</a></li>\n' % time_str)
+evdisplay.write('\t<li><a href="/electoral-college-map/" style="color: blue">Obama: %s</a></li>\n' % dem_ev)
+evdisplay.write('\t<li><a href="/electoral-college-map/" style="color: red">Romney: %s</a></li>\n' % gop_ev)
 
 evdisplay.write('\t<li><a href="/faq/#metamargin">Meta-margin</a>: ')
 
