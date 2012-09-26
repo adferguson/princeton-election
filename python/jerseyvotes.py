@@ -16,7 +16,7 @@
 # To seek a commercial-use license, contact sswang@princeton.edu
 #
 # Update History:
-#    Sep 19, 2012 -- Permit JerseyVotes calculation to be done for all states
+#    Aug 19, 2012 -- moved to GitHub; future updates in commit messages
 #    Jul  7, 2012 -- Initial port from 2008 version
 #
 ############################################################################
@@ -37,11 +37,11 @@ def display_state(jvdisplay, state):
     data_url = huffpo_url_pattern % state_names[state].lower().replace(" ", "-")
     
     if margin > 0:
-        jvdisplay.write('<td><a href="%s" style="color: blue">Obama +%s%%</a></td>'
-                % (data_url, margin))
+        jvdisplay.write('<td><a href="%s" style="text-decoration: none; color: blue">'
+                'Obama +%s%%</a></td>' % (data_url, margin))
     elif margin < 0:
-        jvdisplay.write('<td><a href="%s" style="color: red">Romney +%s%%</a></td>'
-                % (data_url, -margin))
+        jvdisplay.write('<td><a href="%s" style="text-decoration: none; color: red">'
+                'Romney +%s%%</a></td>' % (data_url, -margin))
     else:
         jvdisplay.write("<td>Tied</td>")
     
