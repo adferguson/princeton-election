@@ -22,6 +22,9 @@
 ############################################################################
 
 from decimal import Decimal
+from update_polls import state_names
+
+huffpo_url_pattern = "http://elections.huffingtonpost.com/pollster/2012-%s-president-romney-vs-obama"
 
 jerseyvotes = {}
 statemargins = {}
@@ -31,11 +34,14 @@ def display_state(jvdisplay, state):
     jvdisplay.write("\t<td>%s</td>" % state)
 
     margin = statemargins[state]
+    data_url = huffpo_url_pattern % state_names[state].lower().replace(" ", "-")
     
     if margin > 0:
-        jvdisplay.write('<td style="color: blue">Obama +%s%%</td>' % margin)
+        jvdisplay.write('<td><a href="%s" style="color: blue">Obama +%s%%</a></td>'
+                % (data_url, margin))
     elif margin < 0:
-        jvdisplay.write('<td style="color: red">Romney +%s%%</td>' % -margin)
+        jvdisplay.write('<td><a href="%s" style="color: red">Romney +%s%%</a></td>'
+                % (data_url, -margin))
     else:
         jvdisplay.write("<td>Tied</td>")
     
