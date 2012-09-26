@@ -2,3 +2,7 @@
 *.jar
 *.class
 .*
+*.csv
+*.jpg
+*.mat
+polls.median.txt
