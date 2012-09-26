@@ -25,6 +25,7 @@
 # To seek a commercial-use license, contact sswang@princeton.edu
 #
 # Update History:
+#    Aug 19, 2012 -- moved to GitHub; future updates in commit messages
 #    Jul 10, 2012 -- Updated for new HuffPo XML format
 #    Jul  8, 2012 -- Export CSV files for exploratory analysis
 #    Jul  7, 2012 -- Initial port from 2008 version
@@ -404,8 +405,16 @@ def process_pollfile(xmldoc):
         start_date = strpdate(poll.getElementsByTagName("start_date")[0].childNodes[0].nodeValue)
         end_date = strpdate(poll.getElementsByTagName("end_date")[0].childNodes[0].nodeValue)
 
-        for subpop in q.getElementsByTagName("subpopulation"):
-            process_subpop(poll_org, method, state, start_date, end_date, subpop)
+        subpops = q.getElementsByTagName("subpopulation")
+
+        if len(subpops) >= 2:
+            for subpop in subpops:
+                vtype = get_opt_subelem(subpop, "name", "")
+                if vtype == "Likely Voter":
+                    process_subpop(poll_org, method, state, start_date, end_date, subpop)
+        else:
+            for subpop in subpops:
+                process_subpop(poll_org, method, state, start_date, end_date, subpop)
 
 
 ############################################################################
