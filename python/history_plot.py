@@ -135,12 +135,30 @@ plot(dates, medianDem, '-k', linewidth=2)
 xs, ys = poly_between(dates, lowDem95, highDem95)
 fill(xs, ys, '#222222', alpha=0.075, edgecolor='none')
 
+#
 # hurricane tracker prediction
-xs, ys = poly_between([308, 310], [262, 262], [357, 357])
+#
+pfile = open("prediction.txt")
+prediction = {}
+for line in pfile:
+    (k, v) = line[:-1].split("=")
+    prediction[k] = v
+pfile.close()
+
+low = prediction["2sigma_low"]
+high = prediction["2sigma_high"]
+xs, ys = poly_between([308, 310], [low, low], [high, high])
 fill(xs, ys, 'yellow', edgecolor='none')
-xs, ys = poly_between([308, 310], [287, 287], [337, 337])
+
+low = prediction["1sigma_low"]
+high = prediction["1sigma_high"]
+xs, ys = poly_between([308, 310], [low, low], [high, high])
 fill(xs, ys, 'red', edgecolor='none')
+
 text(312, 327, "Prediction", fontsize=14, rotation='270')
+#
+# end hurricane tracker prediction
+#
 
 xlim(campaign_start, 320)
 ylim(157, 383)
