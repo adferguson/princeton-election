@@ -25,7 +25,10 @@ cd ..
 mv -f python/polls.median.txt matlab/polls.median.txt
 
 cd matlab
+tail -2 EV_estimate_history.csv
 /raid/software/matlab-7.1/bin/matlab -nodisplay -nojvm -r EV_runner 2>&1 > /dev/null
+tail -2 EV_estimate_history.csv
+ls -l EV_estimate_history.csv
 
 cd ../python
 ./current_ev.py
