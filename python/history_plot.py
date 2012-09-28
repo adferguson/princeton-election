@@ -142,16 +142,23 @@ pfile = open("prediction.txt")
 prediction = {}
 for line in pfile:
     (k, v) = line[:-1].split("=")
-    prediction[k] = v
+    prediction[k] = int(v)
 pfile.close()
 
-low = prediction["2sigma_low"]
-high = prediction["2sigma_high"]
+low = min(prediction["2sigma_low"], lowDem95[-1])
+high = max(prediction["2sigma_high"], highDem95[-1])
+
+xs, ys = poly_between([dates[-1], 308], [medianDem[-1], low], [medianDem[-1], high])
+xs, ys = poly_between([dates[-1], 308], [lowDem95[-1], low], [highDem95[-1], high])
+fill(xs, ys, 'yellow', alpha=0.3, edgecolor='none')
 xs, ys = poly_between([308, 310], [low, low], [high, high])
 fill(xs, ys, 'yellow', edgecolor='none')
 
 low = prediction["1sigma_low"]
 high = prediction["1sigma_high"]
+xs, ys = poly_between([dates[-1], 308], [medianDem[-1], low], [medianDem[-1]+1, high])
+#fill(xs, ys, '#ffe5e5', edgecolor='none')
+fill(xs, ys, 'red', alpha=0.2, edgecolor='red')
 xs, ys = poly_between([308, 310], [low, low], [high, high])
 fill(xs, ys, 'red', edgecolor='none')
 
