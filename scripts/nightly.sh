@@ -47,7 +47,7 @@ convert -resize 500x500 EV_history-full_size.png EV_history.png
 
 cd ..
 mv -f python/*.html autotext/
-mv -f python/*.txt autotext/
+mv -f python/email_update.txt autotext/
 mv -f python/*.png autographics/
 mv -f python/*.csv private/
 mv -f python/ev_map_runner.sh bin/
