@@ -20,8 +20,7 @@
 # To seek a commercial-use license, contact sswang@princeton.edu
 #
 # Update History:
-#    Sep 10, 2012 -- Added some annotations
-#    Sep  4, 2012 -- Relabel graph; lighten the band
+#    Aug 19, 2012 -- moved to GitHub; future updates in commit messages
 #    Aug 12, 2012 -- Add support for comments in csv file; CI more translucent
 #    Jul  8, 2012 -- Add year to large chart
 #    Jul  7, 2012 -- Update for 2012
@@ -200,6 +199,12 @@ annotate("RNC", xy=(day, medianDem[day-campaign_start]+2), xytext=(float(day) + 
 day=250
 annotate("DNC", xy=(day, medianDem[day-campaign_start]-2), xytext=(float(day) + 0.01,
 	medianDem[day-campaign_start]-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
+	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
+	horizontalalignment='center', verticalalignment='top', fontsize=12)
+# Sept 17
+day=261
+annotate("47%", xy=(day, medianDem[day-campaign_start]-7), xytext=(float(day) + 0.01,
+	medianDem[day-campaign_start]-47), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 
