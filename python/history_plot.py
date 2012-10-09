@@ -207,6 +207,12 @@ annotate("47%", xy=(day, medianDem[day-campaign_start]-7), xytext=(float(day) + 
 	medianDem[day-campaign_start]-47), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
+# Oct 3
+day=277
+annotate("Debate #1",xy=(day, medianDem[day-campaign_start]+15), xytext=(float(day) + 0.01,
+	medianDem[day-campaign_start]+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
+	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
+	horizontalalignment='center', verticalalignment='top', fontsize=12)
 
 ## End Annotations 
 
