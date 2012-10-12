@@ -137,11 +137,12 @@ fill(xs, ys, '#222222', alpha=0.075, edgecolor='none')
 #
 # hurricane tracker prediction
 #
-pfile = open("prediction.txt")
+pfile = open("../matlab/EV_prediction.csv")
 prediction = {}
-for line in pfile:
-    (k, v) = line[:-1].split("=")
-    prediction[k] = int(v)
+
+(prediction["1sigma_low"], prediction["1sigma_high"], prediction["2sigma_low"],
+        prediction["2sigma_high"]) = map(int, pfile.read().strip().split(","))
+
 pfile.close()
 
 low = min(prediction["2sigma_low"], lowDem95[-1])
