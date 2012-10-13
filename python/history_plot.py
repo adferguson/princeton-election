@@ -33,9 +33,14 @@ import time
 import matplotlib
 matplotlib.use('Agg')
 from pylab import *
+import datetime
 
-# May 22nd is day 143, April 1 is day 92
-campaign_start = 143 # TODO(adf): calculate? also below in xticks
+def campaign_day(day):
+    jan_one = datetime.date(datetime.date.today().year, 1, 1)
+    return ((day - jan_one).days + 1)
+
+
+campaign_start = campaign_day(datetime.date(2012, 5, 22))
 
 hfile = open("../matlab/EV_estimate_history.csv")
 ev_hist = array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
@@ -194,39 +199,37 @@ savefig(open('EV_history-unlabeled.png', 'w'), dpi=62.5, facecolor='#fcfcf4',
 ## Annotations 
 
 # July 12
-day=194
-#annotate("Bain", xy=(day, medianDem[day-campaign_start]-2), xytext=(float(day) + 0.01,
+day=campaign_day(datetime.date(2012, 7, 12))
 annotate("Bain", xy=(day, 303), xytext=(float(day) + 0.01,
 	303-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 # August 11
-day=224
-#annotate("Ryan\nas VP", xy=(day, medianDem[day-campaign_start]+2), xytext=(float(day) + 0.01,
+day=campaign_day(datetime.date(2012, 8, 11))
 annotate("Ryan\nas VP", xy=(day, 333), xytext=(float(day) + 0.01,
 	333+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 # August 30
-day=243
+day=campaign_day(datetime.date(2012, 8, 30))
 annotate("RNC", xy=(day, medianDem[day-campaign_start]+2), xytext=(float(day) + 0.01,
 	medianDem[day-campaign_start]+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 # Sept 6
-day=250
+day=campaign_day(datetime.date(2012, 9, 6))
 annotate("DNC", xy=(day, medianDem[day-campaign_start]-2), xytext=(float(day) + 0.01,
 	medianDem[day-campaign_start]-42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 # Sept 17
-day=261
+day=campaign_day(datetime.date(2012, 9, 17))
 annotate("47%", xy=(day, medianDem[day-campaign_start]-7), xytext=(float(day) + 0.01,
 	medianDem[day-campaign_start]-47), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
 	horizontalalignment='center', verticalalignment='top', fontsize=12)
 # Oct 3
-day=277
+day=campaign_day(datetime.date(2012, 10, 3))
 annotate("Debate #1",xy=(day, medianDem[day-campaign_start]+15), xytext=(float(day) + 0.01,
 	medianDem[day-campaign_start]+42), textcoords='data', arrowprops=dict(facecolor='darkblue',
 	edgecolor='darkblue', shrink=0.075, width=0.5, headwidth=4),
