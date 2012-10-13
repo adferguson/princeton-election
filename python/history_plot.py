@@ -95,6 +95,34 @@ plot(dates, medianDem, '-k', linewidth=2)
 xs, ys = poly_between(dates, lowDem95, highDem95)
 fill(xs, ys, '#222222', alpha=0.075, edgecolor='none')
 
+#
+# hurricane tracker prediction ... functions would be nice :-(
+#
+pfile = open("../matlab/EV_prediction.csv")
+prediction = {}
+
+(prediction["1sigma_low"], prediction["1sigma_high"], prediction["2sigma_low"],
+        prediction["2sigma_high"]) = map(int, pfile.read().strip().split(","))
+
+pfile.close()
+
+low = min(prediction["2sigma_low"], lowDem95[-1])
+high = max(prediction["2sigma_high"], highDem95[-1])
+xs, ys = poly_between([dates[-1], 308], [lowDem95[-1], low], [highDem95[-1], high])
+fill(xs, ys, 'yellow', alpha=0.3, edgecolor='none')
+xs, ys = poly_between([308, 310], [low, low], [high, high])
+fill(xs, ys, 'yellow', edgecolor='none')
+
+low = prediction["1sigma_low"]
+high = prediction["1sigma_high"]
+xs, ys = poly_between([dates[-1], 308], [medianDem[-1], low], [medianDem[-1]+1, high])
+fill(xs, ys, 'red', alpha=0.2, edgecolor='red')
+xs, ys = poly_between([308, 310], [low, low], [high, high])
+fill(xs, ys, 'red', edgecolor='none')
+#
+# end hurricane tracker prediction
+#
+
 xlim(campaign_start, 320)
 ylim(157, 383)
 
@@ -137,18 +165,8 @@ fill(xs, ys, '#222222', alpha=0.075, edgecolor='none')
 #
 # hurricane tracker prediction
 #
-pfile = open("../matlab/EV_prediction.csv")
-prediction = {}
-
-(prediction["1sigma_low"], prediction["1sigma_high"], prediction["2sigma_low"],
-        prediction["2sigma_high"]) = map(int, pfile.read().strip().split(","))
-
-pfile.close()
-
 low = min(prediction["2sigma_low"], lowDem95[-1])
 high = max(prediction["2sigma_high"], highDem95[-1])
-
-xs, ys = poly_between([dates[-1], 308], [medianDem[-1], low], [medianDem[-1], high])
 xs, ys = poly_between([dates[-1], 308], [lowDem95[-1], low], [highDem95[-1], high])
 fill(xs, ys, 'yellow', alpha=0.3, edgecolor='none')
 xs, ys = poly_between([308, 310], [low, low], [high, high])
@@ -157,7 +175,6 @@ fill(xs, ys, 'yellow', edgecolor='none')
 low = prediction["1sigma_low"]
 high = prediction["1sigma_high"]
 xs, ys = poly_between([dates[-1], 308], [medianDem[-1], low], [medianDem[-1]+1, high])
-#fill(xs, ys, '#ffe5e5', edgecolor='none')
 fill(xs, ys, 'red', alpha=0.2, edgecolor='red')
 xs, ys = poly_between([308, 310], [low, low], [high, high])
 fill(xs, ys, 'red', edgecolor='none')
