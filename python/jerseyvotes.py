@@ -43,7 +43,8 @@ def display_state(jvdisplay, state):
         jvdisplay.write('<td><a href="%s" style="text-decoration: none; color: red">'
                 'Romney +%s%%</a></td>' % (data_url, -margin))
     else:
-        jvdisplay.write("<td>Tied</td>")
+        jvdisplay.write('<td><a href="%s" style="text-decoration: none; color: black">'
+                'Tied</a></td>' % data_url)
     
     if state != "NJ":
         jvdisplay.write("<td>%#.1f</td>\n" % jerseyvotes[state])
