@@ -252,7 +252,7 @@ def process_polls():
             # enddate>=newer startdate).
 
             if len(polls_ended_before_day) == 0:
-                print "debug info: %s, %d" % (state, day)
+                print "debug info: %s, %s" % (state, str(day))
 
             write_statistics(pfile, polls_ended_before_day)
             pfile.write("%s\n" % int(day.strftime("%j")))
