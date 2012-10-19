@@ -41,9 +41,9 @@ evdisplay.write('\t<li><a href="/electoral-college-map/" style="color: red">Romn
 evdisplay.write('\t<li><a href="/faq/#metamargin">Meta-margin</a>: ')
 
 if metamargin > 0:
-	evdisplay.write('Obama +%s%%</li>\n' % metamargin)
+	evdisplay.write('Obama +%2.2f%%</li>\n' % metamargin)
 elif metamargin < 0:
-	evdisplay.write('Romney +%s%%</li>\n' % -metamargin)
+	evdisplay.write('Romney +%2.2f%%</li>\n' % -metamargin)
 else:
 	evdisplay.write('Tied</li>\n')
 
