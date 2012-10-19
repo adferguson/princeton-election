@@ -57,7 +57,7 @@ gives a median EV expectation of
 
 Obama %s, Romney %s.
 
-Obama's meta-margin is: %s%%
+Obama's meta-margin is: %2.2f%%
 
 This update is effective as of %s.
 
