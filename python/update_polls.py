@@ -53,6 +53,11 @@ state_polls = {}
 # is a list of tuples. Each tuple represents one poll and is of the form:
 # (margin, start date, end date, mid date, population, polling organization)
 
+prev_outcome = {}
+# prev_outcome is a dictionary like state_polls with a single tuple recording
+# the outcome from the previous election for states which have had sparse
+# polling, if any, during the current campaign
+
 poll_ids = []
 max_filenum = 0
 
@@ -87,6 +92,7 @@ def main():
 
     state_file = init_analysis_file(state_filename)
     national_file = init_analysis_file(national_filename)
+    store_prev_outcome()
     
     # load base url
     huffpo_config = open(".huffpo.url")
@@ -104,7 +110,6 @@ def main():
     socket.setdefaulttimeout(5)
     fetch_latest_polls()
 
-    add_2008_results()
     process_polls()
 
     state_file.close()
@@ -186,7 +191,7 @@ def get_two_statistics(set):
 #    - middle date of oldest poll used (January 1= 1)
 #    - average margin where margin>0 is Obama ahead of Romney
 #    - estimated SEM of margin
-#    - analysisdate
+#    - analysisdate (written by the 'process_polls' method)
 
 # Remember, the format of the tuple for each list:
 # (margin, start date, end date, mid date, pop, polling organization)
@@ -196,7 +201,7 @@ def write_statistics(pfile, polls):
     num = len(polls)
 
     if num == 0:
-        assert False # TODO(adf): here, grab the 2008 results!
+        assert False
     elif num == 1:
         pfile.write("%s " % num)
         pfile.write("%s " % int(polls[0][3].strftime("%j")))
@@ -252,7 +257,7 @@ def process_polls():
             # enddate>=newer startdate).
 
             if len(polls_ended_before_day) == 0:
-                print "debug info: %s, %s" % (state, str(day))
+                polls_ended_before_day = [ prev_outcome[state] ]
 
             write_statistics(pfile, polls_ended_before_day)
             pfile.write("%s\n" % int(day.strftime("%j")))
@@ -445,55 +450,52 @@ def campaign_season():
         day = day - datetime.timedelta(1, 0, 0)
 
 
-# TODO(adf): we should do something smart with these states when they
-# DO get a result ... put them in a separate data structure and look-up above
-#
 # Hard-code 2008 results for several states since there is no current
-# polling data and Political analysts do not disagree on the expected outcome.
+# polling data and political analysts do not disagree on the expected outcome.
 
-def add_2008_results():
-    state_polls["DC"].append((86, datetime.date(2012, 1, 1),
+def store_prev_outcome():
+    prev_outcome["DC"] = (86, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 265853,
-        "Election 2008"))
-    state_polls["AL"].append((-22, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["AL"] = (-22, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 2099819,
-        "Election 2008"))
-    state_polls["AK"].append((-22, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["AK"] = (-22, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 326197,
-        "Election 2008"))
-    state_polls["DE"].append((25, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["DE"] = (25, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 412412,
-        "Election 2008"))
-    state_polls["HI"].append((45, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["HI"] = (45, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 453568,
-        "Election 2008"))
-    state_polls["ID"].append((-25, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["ID"] = (-25, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 655032,
-        "Election 2008"))
-    state_polls["KS"].append((-15, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["KS"] = (-15, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 1235872,
-        "Election 2008"))
-    state_polls["KY"].append((-16, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["KY"] = (-16, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 1826508,
-        "Election 2008"))
-    state_polls["LA"].append((-19, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["LA"] = (-19, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 1960761,
-        "Election 2008"))
-    state_polls["MS"].append((-13, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["MS"] = (-13, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 2925205,
-        "Election 2008"))
-    state_polls["RI"].append((28, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["RI"] = (28, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 469767,
-        "Election 2008"))
-    state_polls["UT"].append((-28, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["UT"] = (-28, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 952370,
-        "Election 2008"))
-    state_polls["WV"].append((-13, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["WV"] = (-13, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 713451,
-        "Election 2008"))
-    state_polls["WY"].append((-32, datetime.date(2012, 1, 1),
+        "Election 2008")
+    prev_outcome["WY"] = (-32, datetime.date(2012, 1, 1),
         datetime.date(2012, 1, 1), datetime.date(2012, 1, 1), 254658,
-        "Election 2008"))
+        "Election 2008")
 
 
 state_names = {
