@@ -21,6 +21,14 @@
 
 import time
 
+def format_win_prob(prob):
+    if prob >= 99.0:
+        return "%.1f" % prob
+    else:
+        return "%.0f" % prob
+
+## Estimated electoral votes and the current meta-margin
+
 efile = open("../matlab/EV_estimates.csv")
 values = efile.read()[:-1].split(",")
 efile.close()
@@ -31,6 +39,17 @@ time_str = "%s %s, %s:%s" % (time.strftime("%B"), int(time.localtime()[2]),
 dem_ev = values[0]
 gop_ev = values[1]
 metamargin = float(values[12])
+
+## Estimated win probabilities
+
+efile = open("../matlab/EV_prediction_probs.csv")
+values = efile.read()[:-1].split(",")
+efile.close()
+
+bayesian_win_prob = format_win_prob(float(values[0]) * 100.0)
+drift_win_prob = format_win_prob(float(values[1]) * 100.0)
+
+## Write the website header
 
 evdisplay = open("current_ev.html", "w")
 
@@ -46,6 +65,9 @@ elif metamargin < 0:
 	evdisplay.write('Romney +%2.2f%%</li>\n' % -metamargin)
 else:
 	evdisplay.write('Tied</li>\n')
+
+evdisplay.write('\t<li class="rss"><a href="http://election.princeton.edu/feed/">RSS</a></li>')
+evdisplay.write('\t<li style="float: center; clear: both; padding-top: 0px;">Probability of Obama re-election: Random Drift %s%%, Predictive Model %s%%</li>' % (drift_win_prob, bayesian_win_prob))
 
 evdisplay.close()
 

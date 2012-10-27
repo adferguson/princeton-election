@@ -57,3 +57,7 @@ drift_winprob=tcdf(MM/MMdrift,3)
 %% write to csv for plotter scripts
 outputs = [ ev_1sig_low ev_1sig_hi ev_2sig_lo ev_2sig_hi ];
 dlmwrite('EV_prediction.csv', outputs)
+
+%% write probabilitiess to csv
+outputs = [ bayesian_winprob drift_winprob ];
+dlmwrite('EV_prediction_probs.csv', outputs)
