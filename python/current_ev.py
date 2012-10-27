@@ -67,7 +67,7 @@ else:
 	evdisplay.write('Tied</li>\n')
 
 evdisplay.write('\t<li class="rss"><a href="http://election.princeton.edu/feed/">RSS</a></li>\n')
-evdisplay.write('\t<li style="float: center; clear: both; padding-top: 0px;">Probability of Obama re-election: Random Drift %s%%, Predictive Model %s%%</li>\n' % (drift_win_prob, bayesian_win_prob))
+evdisplay.write('\t<li style="float: center; clear: both; padding-top: 0px;">Probability of Obama re-election: Random Drift %s%%, Prediction %s%%</li>\n' % (drift_win_prob, bayesian_win_prob))
 
 evdisplay.close()
 
