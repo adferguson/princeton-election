@@ -57,14 +57,14 @@ evdisplay.write('\t<li><a href="/history-of-electoral-votes-for-obama/">As of %s
 evdisplay.write('\t<li><a href="/electoral-college-map/" style="color: blue">Obama: %s</a></li>\n' % dem_ev)
 evdisplay.write('\t<li><a href="/electoral-college-map/" style="color: red">Romney: %s</a></li>\n' % gop_ev)
 
-evdisplay.write('\t<li><a href="/faq/#metamargin">Meta-margin</a>: ')
+evdisplay.write('\t<li><a href="/faq/#metamargin">Meta-margin: ')
 
 if metamargin > 0:
-	evdisplay.write('Obama +%2.2f%%</li>\n' % metamargin)
+	evdisplay.write('Obama +%2.2f%%</a></li>\n' % metamargin)
 elif metamargin < 0:
-	evdisplay.write('Romney +%2.2f%%</li>\n' % -metamargin)
+	evdisplay.write('Romney +%2.2f%%</a></li>\n' % -metamargin)
 else:
-	evdisplay.write('Tied</li>\n')
+	evdisplay.write('Tied</a></li>\n')
 
 evdisplay.write('\t<li class="rss"><a href="http://election.princeton.edu/feed/">RSS</a></li>\n')
 evdisplay.write('\t<li style="float: center; clear: both; padding-top: 0px;">Probability of Obama re-election: Random Drift %s%%, Prediction %s%%</li>\n' % (drift_win_prob, bayesian_win_prob))
