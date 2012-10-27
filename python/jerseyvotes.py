@@ -25,6 +25,7 @@ from decimal import Decimal
 from update_polls import state_names
 
 huffpo_url_pattern = "http://elections.huffingtonpost.com/pollster/2012-%s-president-romney-vs-obama"
+num_states_to_display = 15
 
 jerseyvotes = {}
 statemargins = {}
@@ -85,7 +86,8 @@ jvdisplay.write("<tr>\n")
 jvdisplay.write("\t<th>State</th><th>Margin</th><th>Power</th>\n")
 jvdisplay.write("</tr>\n")
 
-top_states = sorted(jerseyvotes, key=lambda x: jerseyvotes[x], reverse=True)[:10]
+top_states = sorted(jerseyvotes, key=lambda x: jerseyvotes[x],
+                    reverse=True)[:num_states_to_display]
 
 for state in top_states:
     display_state(jvdisplay, state)
