@@ -10,6 +10,7 @@
 # To seek a commercial-use license, contact sswang@princeton.edu
 #
 # Update History:
+#    Aug 19, 2012 -- moved to GitHub; future updates in commit messages
 #    Aug 12, 2012 -- Add support for comments in csv file, and date to plot
 #    Jul  8, 2012 -- Updated for 2012 election
 #
@@ -20,6 +21,7 @@ import time
 import matplotlib
 matplotlib.use('Agg')
 from pylab import *
+import datetime
 
 def campaign_day(day):
     jan_one = datetime.date(datetime.date.today().year, 1, 1)
