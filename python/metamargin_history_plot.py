@@ -21,8 +21,12 @@ import matplotlib
 matplotlib.use('Agg')
 from pylab import *
 
-# May 22nd is day 143, April 1 is day 92
-campaign_start = 143 # TODO(adf): calculate? also below in xticks
+def campaign_day(day):
+    jan_one = datetime.date(datetime.date.today().year, 1, 1)
+    return ((day - jan_one).days + 1)
+
+
+campaign_start = campaign_day(datetime.date(2012, 5, 22))
 
 hfile = open("../matlab/EV_estimate_history.csv")
 ev_hist = array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
@@ -86,6 +90,10 @@ text(campaign_start+3, -2.5, time.strftime("%d-%b-%Y %I:%M%p %Z"), fontsize=14)
 text(campaign_start+3, -3.3, "election.princeton.edu", fontsize=14)
 
 plot(dates, metamargin, '-k', linewidth=2)
+
+## Election Day indicator
+day=campaign_day(datetime.date(2012, 11, 6))
+axvline(x=day, linestyle='--', color='black')
 
 xlim(campaign_start, 320)
 ylim(-3.5, 9.5)
