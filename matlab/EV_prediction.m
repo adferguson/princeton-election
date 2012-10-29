@@ -62,3 +62,7 @@ dlmwrite('EV_prediction.csv', outputs)
 %% write probabilitiess to csv
 outputs = [ bayesian_winprob drift_winprob ];
 dlmwrite('EV_prediction_probs.csv', outputs)
+
+%% write meta-margin prediction to csv for plotter scripts
+outputs = [ Msig1lo Msig1hi Msig2lo Msig2hi ];
+dlmwrite('EV_prediction_MM.csv', outputs)
