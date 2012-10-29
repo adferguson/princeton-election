@@ -91,9 +91,38 @@ text(campaign_start+3, -3.3, "election.princeton.edu", fontsize=14)
 
 plot(dates, metamargin, '-k', linewidth=2)
 
+#
+# hurricane tracker prediction ... functions would be nice :-(
+#
+pfile = open("../matlab/EV_prediction_MM.csv")
+prediction = {}
+
+(prediction["1sigma_low"], prediction["1sigma_high"], prediction["2sigma_low"],
+        prediction["2sigma_high"]) = map(float, pfile.read().strip().split(","))
+
+pfile.close()
+
+election = campaign_day(datetime.date(2012, 11, 6))
+
+low = prediction["2sigma_low"]
+high = prediction["2sigma_high"]
+xs, ys = poly_between([dates[-1], election-2], [metamargin[-1], low], [metamargin[-1], high])
+fill(xs, ys, 'yellow', alpha=0.3, edgecolor='none')
+xs, ys = poly_between([election-2, election], [low, low], [high, high])
+fill(xs, ys, 'yellow', edgecolor='none')
+
+low = prediction["1sigma_low"]
+high = prediction["1sigma_high"]
+xs, ys = poly_between([dates[-1], election-2], [metamargin[-1], low], [metamargin[-1], high])
+fill(xs, ys, 'red', alpha=0.2, edgecolor='red')
+xs, ys = poly_between([election-2, election], [low, low], [high, high])
+fill(xs, ys, 'red', edgecolor='none')
+#
+# end hurricane tracker prediction
+#
+
 ## Election Day indicator
-day=campaign_day(datetime.date(2012, 11, 6))
-axvline(x=day, linestyle='--', color='black')
+axvline(x=election, linestyle='--', color='black')
 
 xlim(campaign_start, 320)
 ylim(-3.5, 9.5)
