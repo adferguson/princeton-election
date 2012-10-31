@@ -100,11 +100,11 @@ def main():
     huffpo_config.close()
 
     # process archive of polls
-#    for fname in os.listdir(archive_dir):
-#        n = int(fname.split(".")[0])
-#        if n > max_filenum:
-#            max_filenum = n
-#        parse_pollfile(archive_dir + fname)
+    for fname in os.listdir(archive_dir):
+        n = int(fname.split(".")[0])
+        if n > max_filenum:
+            max_filenum = n
+        parse_pollfile(archive_dir + fname)
 
     # get the latest polls
     socket.setdefaulttimeout(5)
@@ -297,7 +297,7 @@ def fetch_latest_polls():
         print "Fetching page: " + str(page_num)
         page = url_fetcher(page_num)
 
-        xmldoc = parse_pollfile(page)
+        (xmldoc, stop) = parse_pollfile(page)
         xmldoc.childNodes[0].normalize()
 
         if len(xmldoc.childNodes[0].childNodes) > 1:
@@ -305,10 +305,9 @@ def fetch_latest_polls():
             f = open(archive_dir + str(max_filenum) + ".xml", 'w')
             xmldoc.writexml(f)
             f.close()
+            print "Wrote %d polls to %s" % (0.5 * (len(xmldoc.childNodes[0].childNodes) - 1), str(max_filenum))
 
-        if len(xmldoc.childNodes[0].childNodes) == 0:
-            stop = True
-        else:
+        if not stop:
             time.sleep(1)
 
 
@@ -322,15 +321,18 @@ def fetch_latest_polls():
 
 
 def parse_pollfile(filename):
-    xmldoc = unique_polls(filename)
+    (xmldoc, stop) = unique_polls(filename)
     process_pollfile(xmldoc)
-    return xmldoc
+    return (xmldoc, stop)
 
 
 def unique_polls(filename):
     xmldoc = xml.dom.minidom.parse(filename)
     
     pi_nodes = xmldoc.getElementsByTagName("id")
+
+    if len(pi_nodes) == 0:
+        return (xmldoc, True)
     
     for pi_node in pi_nodes:
         poll_id = int(pi_node.childNodes[0].nodeValue)
@@ -342,7 +344,7 @@ def unique_polls(filename):
         else:
             poll_ids.append(poll_id)
     
-    return xmldoc
+    return (xmldoc, False)
 
 
 def get_opt_subelem(elem, name, default):
