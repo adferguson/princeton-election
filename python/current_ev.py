@@ -22,7 +22,7 @@
 import time
 
 def format_win_prob(prob):
-    if prob >= 99.0:
+    if prob >= 98.0:
         return "%.1f" % prob
     else:
         return "%.0f" % prob
