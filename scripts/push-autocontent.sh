@@ -11,3 +11,6 @@ scp *.html swang@synapse.princeton.edu:/var/www/html/autotext/
 
 cd $SRC_PATH/matlab
 scp *.csv swang@synapse.princeton.edu:/var/www/html/code/matlab/
+
+cd $SRC_PATH/python/processed
+scp *.csv swang@synapse.princeton.edu:/var/www/html/code/python/processed/
