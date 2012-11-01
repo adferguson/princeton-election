@@ -2,6 +2,7 @@
 
 MM=metamargin; % today's Meta-Margin
 
+today=floor(now)
 N=datenum(2012,11,6)-today; % assuming date is set correctly in machine
 % MMdrift=min(0.4*sqrt(N),1.8) % random-walk drift as seen empirically
 MMdrift=min(sqrt(0.4*0.4*N+0.25),1.8) % the 0.25 term adds a minimal uncertainty

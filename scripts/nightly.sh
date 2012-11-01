@@ -17,7 +17,13 @@
 #
 ############################################################################
 
-cd ~/python/
+#MATLAB_PATH="/raid/software/matlab-7.1/bin"
+MATLAB_PATH="/local/bin"
+
+#SRC_PATH="/home/election"
+SRC_PATH="/home/adf/pec/princeton-election"
+
+cd $SRC_PATH/python/
 ./update_polls.py
 
 cd ..
@@ -25,7 +31,7 @@ mv -f python/polls.median.txt matlab/polls.median.txt
 
 cd matlab
 tail -2 EV_estimate_history.csv
-/raid/software/matlab-7.1/bin/matlab -nodisplay -nojvm -r EV_runner 2>&1 > /dev/null
+$MATLAB_PATH/matlab -nodisplay -nojvm -r EV_runner 2>&1 > /dev/null
 tail -2 EV_estimate_history.csv
 ls -l EV_estimate_history.csv
 
@@ -48,7 +54,7 @@ cd ..
 mv -f python/*.html autotext/
 mv -f python/email_update.txt autotext/
 mv -f python/*.png autographics/
-mv -f python/*.csv private/
+mv -f python/*.csv python/processed/
 mv -f python/ev_map_runner.sh bin/
 chmod a+x bin/ev_map_runner.sh
 
@@ -58,3 +64,5 @@ cd java
 
 cd ..
 mv -f java/*.png autographics/
+
+./bin/push-autocontent.sh

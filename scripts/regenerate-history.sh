@@ -15,11 +15,17 @@
 
 HISTORY=EV_estimate_history.csv
 
-cd ~/matlab
+#MATLAB_PATH="/raid/software/matlab-7.1/bin"
+MATLAB_PATH="/local/bin"
+
+#SRC_PATH="/home/election"
+SRC_PATH="/home/adf/pec/princeton-election"
+
+cd $SRC_PATH/matlab
 rm $HISTORY
 touch $HISTORY
 
-cd ~/python/
+cd $SRC_PATH/python/
 ./update_polls.py
 
 cd ..
@@ -33,11 +39,11 @@ while [ $day -le $last_day ]; do
     amount=$((day*51))
     echo "Day: $day, Amount: $amount"
 
-	tail -$amount polls.median.txt > ~/matlab/polls.median.txt
+	tail -$amount polls.median.txt > $SRC_PATH/matlab/polls.median.txt
 
-	cd ~/matlab/
-	/raid/software/matlab-7.1/bin/matlab -nodisplay -nojvm -r EV_runner 2>&1 > /dev/null
-    cd ~/bin/
+	cd $SRC_PATH/matlab/
+	$MATLAB_PATH/matlab -nodisplay -nojvm -r EV_runner 2>&1 > /dev/null
+    cd $SRC_PATH/bin/
 
 	day=$((day+1))
 done
