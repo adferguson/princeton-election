@@ -132,3 +132,7 @@ ylim(-3.5, 9.5)
 show()
 savefig(open('MM_history-unlabeled.png', 'w'), dpi=62.5, facecolor='#fcfcf4',
 		edgecolor='#fcfcf4')
+
+show()
+savefig(open('MM_history-full_size.png', 'w'), facecolor='#fcfcf4',
+		edgecolor='#fcfcf4')
