@@ -57,7 +57,7 @@ evdisplay.write('\t<li><a href="/history-of-electoral-votes-for-obama/">As of %s
 evdisplay.write('\t<li><a href="/electoral-college-map/" style="color: blue">Obama: %s</a></li>\n' % dem_ev)
 evdisplay.write('\t<li><a href="/electoral-college-map/" style="color: red">Romney: %s</a></li>\n' % gop_ev)
 
-evdisplay.write('\t<li><a href="/faq/#metamargin">Meta-margin: ')
+evdisplay.write('\t<li><a href="http://webcache.googleusercontent.com/search?q=cache:dBA--0RdTqMJ:election.princeton.edu/faq/">Meta-margin: ')
 
 if metamargin > 0:
 	evdisplay.write('Obama +%2.2f%%</a></li>\n' % metamargin)
@@ -66,8 +66,8 @@ elif metamargin < 0:
 else:
 	evdisplay.write('Tied</a></li>\n')
 
-evdisplay.write('\t<li class="rss"><a href="http://election.princeton.edu/feed/">RSS</a></li>\n')
-evdisplay.write('\t<li style="float: center; clear: both; padding-top: 0px;"><a href="http://election.princeton.edu/2012/10/27/landfall/">Probability of Obama re-election: Random Drift %s%%, Bayesian Prediction %s%%</a></li>\n' % (drift_win_prob, bayesian_win_prob))
+# evdisplay.write('\t<li class="rss"><a href="http://election.princeton.edu/feed/">RSS</a></li>\n')
+evdisplay.write('\t<li style="float: center; clear: both; padding-top: 0px;"><a href="http://webcache.googleusercontent.com/search?q=cache:dnZvYOBvNIoJ:https://election.princeton.edu/2012/10/27/landfall">Probability of Obama re-election: Random Drift %s%%, Bayesian Prediction %s%%</a></li>\n' % (drift_win_prob, bayesian_win_prob))
 
 evdisplay.close()
 
