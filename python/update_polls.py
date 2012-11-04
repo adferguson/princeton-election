@@ -235,6 +235,38 @@ def write_statistics(pfile, polls):
         pfile.write("%s %s " % get_statistics(working_subset))
 
 
+def drop_overlapping_polls(polls):
+    if len(polls) <= 1:
+        return polls
+
+    cleaned_polls = []
+
+    # sort by: pollster, start date (old to new), end date (old to new)
+    by_pollster = sorted(polls, key=lambda x: (x[5], x[1], x[2]))
+
+    prev_pollster = by_pollster[0][5]
+    prev_start    = by_pollster[0][1]
+    prev_end      = by_pollster[0][2]
+    prev_poll     = by_pollster[0]
+    cleaned_polls.append(by_pollster[0])
+
+    for poll in by_pollster[1:]:
+        if prev_pollster != poll[5]:
+            prev_pollster = poll[5]
+        else:
+            if prev_end > poll[1]:
+                cleaned_polls.pop()
+
+        prev_start    = poll[1]
+        prev_end      = poll[2]
+        prev_poll     = poll
+        cleaned_polls.append(poll)
+
+    # write_statistics expects polls to be sorted from newest to oldest
+    # by mid-date
+    cleaned_polls.sort(key=lambda x: x[3], reverse=True)
+    return cleaned_polls
+
 def process_polls():
     pfile = open(output_filename, "w")
 
@@ -249,17 +281,19 @@ def process_polls():
         for state in sorted(state_names, key=lambda x: state_names[x]):
             polls = state_polls[state]
 
+            # Remember, the format of the tuple for each list:
+            # (margin, start date, end date, mid date, pop, polling org)
             polls_ended_before_day = filter(lambda x: x[2] < day, polls)
 
-            # XXX cleaning:
             #  reject two polls by the same pollster if their
             # [startdate,enddate] intervals overlap (i.e. if older
             # enddate>=newer startdate).
+            cleaned_polls = drop_overlapping_polls(polls_ended_before_day)
 
-            if len(polls_ended_before_day) == 0:
-                polls_ended_before_day = [ prev_outcome[state] ]
+            if len(cleaned_polls) == 0:
+                cleaned_polls = [ prev_outcome[state] ]
 
-            write_statistics(pfile, polls_ended_before_day)
+            write_statistics(pfile, cleaned_polls)
             pfile.write("%s\n" % int(day.strftime("%j")))
 
     pfile.close()
