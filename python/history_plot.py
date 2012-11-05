@@ -115,16 +115,16 @@ election = campaign_day(datetime.date(2012, 11, 6))
 
 low = min(prediction["2sigma_low"], lowDem95[-1])
 high = max(prediction["2sigma_high"], highDem95[-1])
-xs, ys = poly_between([dates[-1], election-2], [lowDem95[-1], low], [highDem95[-1], high])
+xs, ys = poly_between([dates[-1], election], [lowDem95[-1], low], [highDem95[-1], high])
 fill(xs, ys, 'yellow', alpha=0.3, edgecolor='none')
-xs, ys = poly_between([election-2, election], [low, low], [high, high])
+xs, ys = poly_between([election, election+2], [low, low], [high, high])
 fill(xs, ys, 'yellow', edgecolor='none')
 
 low = prediction["1sigma_low"]
 high = prediction["1sigma_high"]
-xs, ys = poly_between([dates[-1], election-2], [medianDem[-1], low], [medianDem[-1]+1, high])
+xs, ys = poly_between([dates[-1], election], [medianDem[-1], low], [medianDem[-1]+1, high])
 fill(xs, ys, 'red', alpha=0.2, edgecolor='red')
-xs, ys = poly_between([election-2, election], [low, low], [high, high])
+xs, ys = poly_between([election, election+2], [low, low], [high, high])
 fill(xs, ys, 'red', edgecolor='none')
 #
 # end hurricane tracker prediction
@@ -176,19 +176,19 @@ election = campaign_day(datetime.date(2012, 11, 6))
 
 low = min(prediction["2sigma_low"], lowDem95[-1])
 high = max(prediction["2sigma_high"], highDem95[-1])
-xs, ys = poly_between([dates[-1], election-2], [lowDem95[-1], low], [highDem95[-1], high])
+xs, ys = poly_between([dates[-1], election], [lowDem95[-1], low], [highDem95[-1], high])
 fill(xs, ys, 'yellow', alpha=0.3, edgecolor='none')
-xs, ys = poly_between([election-2, election], [low, low], [high, high])
+xs, ys = poly_between([election, election+2], [low, low], [high, high])
 fill(xs, ys, 'yellow', edgecolor='none')
 
 low = prediction["1sigma_low"]
 high = prediction["1sigma_high"]
-xs, ys = poly_between([dates[-1], election-2], [medianDem[-1], low], [medianDem[-1]+1, high])
+xs, ys = poly_between([dates[-1], election], [medianDem[-1], low], [medianDem[-1]+1, high])
 fill(xs, ys, 'red', alpha=0.2, edgecolor='red')
-xs, ys = poly_between([election-2, election], [low, low], [high, high])
+xs, ys = poly_between([election, election+2], [low, low], [high, high])
 fill(xs, ys, 'red', edgecolor='none')
 
-text(312, 327, "Prediction", fontsize=14, rotation='270')
+text(314, 327, "Prediction", fontsize=14, rotation='270')
 #
 # end hurricane tracker prediction
 #
