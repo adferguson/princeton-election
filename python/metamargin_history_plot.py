@@ -108,16 +108,16 @@ election = campaign_day(datetime.date(2012, 11, 6))
 
 low = prediction["2sigma_low"]
 high = prediction["2sigma_high"]
-xs, ys = poly_between([dates[-1], election-2], [metamargin[-1], low], [metamargin[-1], high])
+xs, ys = poly_between([dates[-1], election], [metamargin[-1], low], [metamargin[-1], high])
 fill(xs, ys, 'yellow', alpha=0.3, edgecolor='none')
-xs, ys = poly_between([election-2, election], [low, low], [high, high])
+xs, ys = poly_between([election, election+2], [low, low], [high, high])
 fill(xs, ys, 'yellow', edgecolor='none')
 
 low = prediction["1sigma_low"]
 high = prediction["1sigma_high"]
-xs, ys = poly_between([dates[-1], election-2], [metamargin[-1], low], [metamargin[-1], high])
+xs, ys = poly_between([dates[-1], election], [metamargin[-1], low], [metamargin[-1], high])
 fill(xs, ys, 'red', alpha=0.2, edgecolor='red')
-xs, ys = poly_between([election-2, election], [low, low], [high, high])
+xs, ys = poly_between([election, election+2], [low, low], [high, high])
 fill(xs, ys, 'red', edgecolor='none')
 #
 # end hurricane tracker prediction
