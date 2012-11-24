@@ -29,6 +29,10 @@ def campaign_day(day):
 
 
 campaign_start = campaign_day(datetime.date(2012, 5, 22))
+campaign_months = [campaign_start]
+campaign_months.extend(map(
+                        lambda m: campaign_day(datetime.date(2012, m, 1)),
+                        xrange(6, 12))) # June - November
 
 hfile = open("../matlab/EV_estimate_history.csv")
 ev_hist = array([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]])
@@ -75,8 +79,7 @@ subplot(111, axisbelow=True, axisbg='w')
 plot((90, 320), (0, 0), '-r', linewidth=1)
 
 yticks(arange(-2, 10, 2))
-# TODO(adf): construct programatically (month starts after campaign_start)
-xticks([campaign_start,153,183,214,245,275,306],
+xticks(campaign_months,
 		('        May','            Jun',
 		 '            Jul','            Aug','            Sep',
 		 '            Oct','        Nov'), fontsize=16)
